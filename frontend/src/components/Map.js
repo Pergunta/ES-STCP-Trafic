@@ -1,5 +1,5 @@
 import React, { Component}  from 'react';
-import ReactMapGL from 'react-map-gl';
+import ReactMapGL, {Marker , Popup} from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
 // const MAPBOX_TOKEN = 'pk.eyJ1Ijoic2Fwb2tva2FzIiwiYSI6ImNrOTA2bXdhMTB1dGIzZnMycjBlc3JxeXcifQ.Sk-_m4_pM8lUX-wyMZh04g';
@@ -14,7 +14,7 @@ class Map extends Component{
     
     token = 'pk.eyJ1Ijoic2Fwb2tva2FzIiwiYSI6ImNrOTA2bXdhMTB1dGIzZnMycjBlc3JxeXcifQ.Sk-_m4_pM8lUX-wyMZh04g' ;
 
-    state = {
+      state = {
         viewport: {
           width: "100vw",
           height: "100vh",
@@ -23,7 +23,9 @@ class Map extends Component{
           zoom: 10
         },
         loading : true,
-        data : []
+        data : [],
+        selectedBus : {}
+
       };
 
     componentDidMount(){
@@ -33,6 +35,8 @@ class Map extends Component{
         
     }
     
+  
+
     render(){        
         return (
             /**<div>
@@ -43,9 +47,41 @@ class Map extends Component{
                 mapboxApiAccessToken = {this.token}
                 onViewportChange={(viewport) => this.setState({viewport})}
                 >
-                  Marks here
+                  {this.state.data.map((c) => (
+                    <Marker 
+                      key = {c.id}
+                      latitude ={c.lat} 
+                      longitude = {c.lon} 
+                    >
+                    <button 
+                      className = "marker-btn"
+                      onClick = {e => {e.preventDefault()
+                                        this.setState({
+                                          ...this.state,
+                                          selectedBus:{c}
+                                        })
+                                      }
+                                } 
+                    >
+                      <img src ="bus.png" alt="Bus Icon"/>
+                    </button>
+                    </Marker>
+                  ))}
+                 
                 </ReactMapGL>
             </div>
+        
+         /** 
+                  {this.state.selectedBus ? (
+                    <Popup 
+                      latitude = {this.state.selectedBus.lat}
+                      longitude = {this.state.selectedBus.lon}
+                    >
+                      <div>bus</div>
+                    </Popup>
+                   
+                  ):null}
+                  */
         )
     }
 }
