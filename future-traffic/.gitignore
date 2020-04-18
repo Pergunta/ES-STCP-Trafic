@@ -32,4 +32,4 @@ build/
 
 *.csv
 
-/.metadata/
+.metadata/
