@@ -1,0 +1,49 @@
+apply plugin: 'java'
+apply plugin: 'maven'
+
+group = 'project'
+version = '0.0.1-SNAPSHOT'
+
+description = """demo"""
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+tasks.withType(JavaCompile) {
+	options.encoding = 'UTF-8'
+}
+
+
+
+repositories {
+        
+     maven { url "https://repo.maven.apache.org/maven2" }
+}
+dependencies {
+    testImplementation 'io.cucumber:cucumber-java:5.6.0'
+
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version:'2.2.6.RELEASE'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version:'2.2.6.RELEASE'
+    runtime(group: 'mysql', name: 'mysql-connector-java', version:'8.0.19') {
+exclude(module: 'protobuf-java')
+    }
+    runtime group: 'org.springframework.boot', name: 'spring-boot-devtools', version:'2.2.6.RELEASE'
+    testCompile(group: 'org.springframework.boot', name: 'spring-boot-starter-test', version:'2.2.6.RELEASE') {
+exclude(module: 'junit-vintage-engine')
+    }
+}
+configurations {
+    cucumberRuntime {
+        extendsFrom testImplementation
+    }
+}
+
+task cucumber() {
+    dependsOn assemble, compileTestJava
+    doLast {
+        javaexec {
+            main = "io.cucumber.core.cli.Main"
+            classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
+            args = ['--plugin', 'pretty', '--glue', 'futuretraffic', 'src/main/resources']
+        }
+    }
+}
