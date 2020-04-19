@@ -1,4 +1,5 @@
 import React, { Component}  from 'react';
+import maxBounds from './MyOverlay';
 import ReactMapGL, {Marker , Popup} from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
@@ -13,7 +14,6 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 class Map extends Component{
     
     token = 'pk.eyJ1Ijoic2Fwb2tva2FzIiwiYSI6ImNrOTA2bXdhMTB1dGIzZnMycjBlc3JxeXcifQ.Sk-_m4_pM8lUX-wyMZh04g' ;
-
       state = {
         viewport: {
           width: "100vw",
@@ -45,7 +45,19 @@ class Map extends Component{
               <div >
                 <ReactMapGL  {...this.state.viewport} 
                 mapboxApiAccessToken = {this.token}
-                onViewportChange={(viewport) => this.setState({viewport})}
+                onViewportChange={(viewport) =>{
+
+                  this.setState( {
+                    viewport: { ...this.state.viewport, ...viewport }
+                  } );
+
+                  this.setState({viewport})
+                  
+                  
+                  
+                  
+                  
+                }}
                 >
                   {this.state.data.map((c) => (
                     <Marker 
