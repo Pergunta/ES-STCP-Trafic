@@ -10,7 +10,6 @@
 	</parent>
 	<groupId>project</groupId>
 	<artifactId>future-traffic</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
 	<name>demo</name>
 	<description>Demo project for Spring Boot</description>
 
@@ -22,6 +21,14 @@
 
 	</properties>
 
+	<distributionManagement>
+		<repository>
+			<id>central</id>
+			<name>c04a282c7a6d-releases</name>
+			<url>http://192.168.160.99:8081/artifactory/libs-release</url>
+		</repository>
+	</distributionManagement>
+	
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
