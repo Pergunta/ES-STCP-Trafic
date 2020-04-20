@@ -2,18 +2,12 @@ pipeline {
 	agent any
 
     stages {
-        stage('Gateway Test') {
-            steps {
-				dir('future-traffic') {
-                	sh 'mvn test'
-				}
-            }
-        }
-        stage('Webserver Test') {
-            steps {
-				dir('future-traffic') {
-                	sh 'mvn test'
-				}
+        stage('Build database'){
+            steps{
+                dir('future-traffic'){
+
+                    sh 'docker pull mysql:latest'
+                }
             }
         }
         stage('Build Gateway') {
@@ -30,6 +24,7 @@ pipeline {
                 }
             }
         }
+
         stage('Publish Gateway') {
             steps {
 				dir('future-traffic') {
