@@ -6,7 +6,6 @@ pipeline {
             steps{
                 dir('future-traffic'){
 
-                    sh 'docker pull mysql:latest'
                     bash './stopSQL'
                     sh 'docker run --name mysql -d -p3306:3306 -e MYSQL_ROOT_PASSWORD=password mysql:latest'
                     sh 'docker exec -it mysql /bin/bash'
