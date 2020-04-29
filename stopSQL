@@ -1,0 +1,4 @@
+if [ "$(docker ps -q -f name=mysql)" ]; then
+        docker stop mysql
+        docker rm mysql
+fi
