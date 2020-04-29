@@ -17,7 +17,7 @@ pipeline {
         }
         stage('Deploy to Artifactory') { 
             steps {
-                sh 'mvn deploy -s settings.xml -DskipTests' 
+                sh 'mvn deploy -f future-traffic/pom.xml -s settings.xml -DskipTests' 
             }
         }
 
