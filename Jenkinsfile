@@ -10,7 +10,25 @@ pipeline {
                 }
             }
         }
-        stage('Build Gateway') {
+        stage('Build') { 
+            steps {
+                sh 'mvn -DskipTests clean package' 
+            }
+        }
+		stage('Test') {
+            steps {
+                sh 'mvn test'
+            }
+            
+        }
+        stage('Deploy to Artifactory') { 
+            steps {
+                sh 'mvn deploy -s settings.xml' 
+            }
+        }
+
+
+        /*stage('Build Gateway') {
             steps {
 				dir('future-traffic') {
                     sh 'docker build -t esp22-gateway .'
@@ -44,6 +62,6 @@ pipeline {
                     '''
                 }
             }
-        }
+        }*/
     }
 }
