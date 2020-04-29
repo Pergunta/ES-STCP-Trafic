@@ -10,20 +10,14 @@ pipeline {
                 }
             }
         }
-        stage('Build') { 
+        stage('Build package') { 
             steps {
                 sh 'mvn -f future-traffic/pom.xml -DskipTests clean package' 
             }
         }
-		stage('Test') {
-            steps {
-                sh 'mvn -f future-traffic/ test'
-            }
-            
-        }
         stage('Deploy to Artifactory') { 
             steps {
-                sh 'mvn deploy -s settings.xml' 
+                sh 'mvn deploy -s settings.xml -DskipTests' 
             }
         }
 
