@@ -12,12 +12,12 @@ pipeline {
         }
         stage('Build') { 
             steps {
-                sh 'mvn -DskipTests clean package' 
+                sh 'mvn -f future-traffic/pom.xml -DskipTests clean package' 
             }
         }
 		stage('Test') {
             steps {
-                sh 'mvn test'
+                sh 'mvn -f future-traffic/ test'
             }
             
         }
