@@ -27,6 +27,14 @@ pipeline {
                 sh 'docker push 192.168.160.99:5000/esp22-future-traffic'
             }
         }
+        stage('Deploy on runtime') {
+            steps {
+                sshagent(credentials: ['future-traffic']) {
+                    sh "ssh ssh -o 'StrictHostKeyChecking=no' esp22@192.168.160.103 docker pull 192.168.160.99:5000/esp22-future-traffic"
+                    sh "ssh ssh -o 'StrictHostKeyChecking=no' esp22@192.168.160.103 docker run -d -p 22080:8080 --name esp22-futuretraffic esp22-future-traffic"
+                }
+            }
+        }
 
         /*stage('Build Gateway') {
             steps {
