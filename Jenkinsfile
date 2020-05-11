@@ -2,33 +2,19 @@ pipeline {
     agent any
 
     stages {
-<<<<<<< HEAD
-=======
-        stage('Build database'){
-            steps{
-                dir('future-traffic'){
-
-                    sh 'docker pull mysql:latest'
-                }
-            }
-        }
+       
         /* stage('Build package') { 
             steps {
                 sh 'mvn -f future-traffic/pom.xml -DskipTests clean package' 
             }
-        } */
+        } 
         stage('Deploy to Artifactory') { 
             steps {
                 sh 'mvn deploy -f future-traffic/pom.xml -s settings.xml -DskipTests' 
             }
         }
-        stage('Deploy backend') {
-            steps {
-                sh 'docker build -t esp22-future-traffic future-traffic/.'
-                sh 'docker tag esp22-future-traffic 192.168.160.99:5000/esp22-future-traffic'
-                sh 'docker push 192.168.160.99:5000/esp22-future-traffic'
-            }
-        }
+        
+        
         stage('Deploy on runtime') {
             steps {
                 sshagent(credentials: ['deploy-key-rsa']) {
@@ -37,23 +23,10 @@ pipeline {
                 }
             }
         }
+        */
+    
+       
 
-        /*stage('Build Gateway') {
-            steps {
-				dir('future-traffic') {
-                    sh 'docker build -t esp22-gateway .'
-                }
-            }
-        }
-        stage('Build Webserver') {
-            steps {
-				dir('frontend') {
-                    sh 'docker build -t esp22-webserver .'
-                }
-            }
-        }
-
->>>>>>> cdb2456a5f54a1a466135e968ce3177aa3a4b3ed
         stage('Publish Gateway') {
             steps {
                 dir('future-traffic') {
