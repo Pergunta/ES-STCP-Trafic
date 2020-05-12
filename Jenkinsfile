@@ -48,14 +48,14 @@ pipeline {
         }
         stage('Deploy db runtime') {
         steps {
-            sshagent(['esp22-ssh-key']) {
+            sshagent(['esp22-runtime']) {
                 sh "ssh -o 'StrictHostKeyChecking=no' - l esp22 192.168.160.103 docker run --name es22-database -p 6106:3306 -e MYSQL_ROOT_PASSWORD=password -d mysql:latest "         
             }
         }
         }
         stage('Deploy backend runtime') {
         steps {
-            sshagent(['esp22-ssh-key']) {
+            sshagent(['esp22-runtime']) {
                 sh "ssh -o 'StrictHostKeyChecking=no' - l esp22 192.168.160.103 docker pull 192.168.160.99:5000/esp22-gateway "
                 sh "ssh -o 'StrictHostKeyChecking=no' - l esp22 192.168.160.103 docker run -d -p 6080:8080 --name esp22-gateway esp22-gateway"
             }
@@ -63,7 +63,7 @@ pipeline {
         }
         stage('Deploy front-end runtime') {
         steps {
-            sshagent(['esp22-ssh-key']) {
+            sshagent(['esp22-runtime']) {
                 sh "ssh -o 'StrictHostKeyChecking=no' - l esp22 192.168.160.103 docker pull 192.168.160.99:5000/esp22-webserver"
                 sh "ssh -o 'StrictHostKeyChecking=no' - l esp22 192.168.160.103 docker run -d -p 6030:8080 --name esp22-webserver esp22-webserver"
             }
