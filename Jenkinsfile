@@ -2,19 +2,14 @@ pipeline {
     agent any
 
     stages {
-       
-        /* stage('Build package') { 
-            steps {
-                sh 'mvn -f future-traffic/pom.xml -DskipTests clean package' 
+        stage('Test'){
+            steps{
+                sshagent(credentials: ['esp22-ssh-key']){
+                    sh 'echo "testing ssh connection"'
+                    sh "ssh -o 'StrictHostKeyChecking=no' -l esp22 192.168.160.103 uname -a"
+                }
             }
-        } 
-        
-        
-        
-        
-        */
-    
-        
+        }       
         stage('Publish Gateway') {
             steps {
                 dir('future-traffic') {
@@ -43,9 +38,9 @@ pipeline {
             steps {
                 sshagent(credentials: ['esp22-ssh-key']) {
                     sh "ssh -o 'StrictHostKeyChecking=no' esp22@192.168.160.103 docker pull 192.168.160.99:5000/esp22-gateway"
-                    //sh "ssh -o 'StrictHostKeyChecking=no' esp22@192.168.160.103 docker pull 192.168.160.99:5000/esp22-webserver"
-                    //sh "ssh -o 'StrictHostKeyChecking=no' esp22@192.168.160.103 docker run -d -p 22080:8080 --name esp22-backend esp22-gateway"
-                    //sh "ssh -o 'StrictHostKeyChecking=no' esp22@192.168.160.103 docker run -d -p 22081:8080 --name esp22-frontend esp22-webserver"
+                    sh "ssh -o 'StrictHostKeyChecking=no' esp22@192.168.160.103 docker pull 192.168.160.99:5000/esp22-webserver"
+                    sh "ssh -o 'StrictHostKeyChecking=no' esp22@192.168.160.103 docker run -d -p 22080:8080 --name esp22-backend esp22-gateway"
+                    sh "ssh -o 'StrictHostKeyChecking=no' esp22@192.168.160.103 docker run -d -p 22081:8080 --name esp22-frontend esp22-webserver"
                 }
             }
         }
