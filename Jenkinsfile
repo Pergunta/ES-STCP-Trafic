@@ -57,7 +57,7 @@ pipeline {
             steps {
                 sshagent(['future-traffic-runtime']) {
                     sh "ssh -o 'StrictHostKeyChecking=no' -l esp22 192.168.160.103 docker pull 192.168.160.99:5000/esp22-gateway "
-                    sh "ssh -o 'StrictHostKeyChecking=no' -l esp22 192.168.160.103 docker run -d -p 6080:8080 --name esp22-gateway esp22-gateway"
+                    sh "ssh -o 'StrictHostKeyChecking=no' -l esp22 192.168.160.103 docker run -d -p 6080:8080 --name esp22-gateway 192.168.160.99:5000/esp22-gateway"
                 }
             }
         }
@@ -65,7 +65,7 @@ pipeline {
             steps {
                 sshagent(['future-traffic-runtime']) {
                     sh "ssh -o 'StrictHostKeyChecking=no' -l esp22 192.168.160.103 docker pull 192.168.160.99:5000/esp22-webserver"
-                    sh "ssh -o 'StrictHostKeyChecking=no' -l esp22 192.168.160.103 docker run -d -p 6030:8080 --name esp22-webserver esp22-webserver"
+                    sh "ssh -o 'StrictHostKeyChecking=no' -l esp22 192.168.160.103 docker run -d -p 6030:8080 --name esp22-webserver 192.168.160.99:5000/esp22-webserver"
                 }
             }
         }
