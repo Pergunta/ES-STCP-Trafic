@@ -8,11 +8,7 @@ pipeline {
                 sh 'mvn -f future-traffic/pom.xml -DskipTests clean package' 
             }
         } 
-        stage('Deploy to Artifactory') { 
-            steps {
-                sh 'mvn deploy -f future-traffic/pom.xml -s settings.xml -DskipTests' 
-            }
-        }
+        
         
         
         stage('Deploy on runtime') {
@@ -43,6 +39,11 @@ pipeline {
                     sh "docker tag esp22-webserver 192.168.160.99:5000/esp22-webserver"
                     sh "docker push 192.168.160.99:5000/esp22-webserver"
                 }
+            }
+        }
+        stage('Deploy to Artifactory') { 
+            steps {
+                sh 'mvn deploy -f future-traffic/pom.xml -s settings.xml -DskipTests' 
             }
         }
     }
