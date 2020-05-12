@@ -22,7 +22,7 @@ class Map extends Component{
       };
 
     componentDidMount(){
-        fetch('http://localhost:8080/api/all')
+        fetch('http://192.168.160.103:6080/api/all')
         .then(response => response.json())
         .then(data => this.setState({ data : data, loading:false}));  
         
