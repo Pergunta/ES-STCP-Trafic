@@ -8,13 +8,13 @@ pipeline {
                 sh 'mvn -f future-traffic/pom.xml -DskipTests clean package assembly:single' 
             }
         } 
-        /*
+        
         stage('Deploy to Artifactory') { 
             steps {
-                sh 'mvn deploy -f future-traffic/pom.xml -s settings.xml -DskipTests' 
+                sh 'mvn deploy -f service-layer/pom.xml -s service-layer/settings.xml' 
             }
         }
-        */
+        
         /*
         stage('Deploy on runtime') {
             steps {
