@@ -8,13 +8,13 @@ pipeline {
                 sh 'mvn -f future-traffic/pom.xml -DskipTests clean package assembly:single' 
             }
         } 
-        
+        /*
         stage('Deploy to Artifactory') { 
             steps {
                 sh 'mvn deploy -f future-traffic/pom.xml -s settings.xml' 
             }
         }
-        
+        */
         /*
         stage('Deploy on runtime') {
             steps {
@@ -30,8 +30,8 @@ pipeline {
         stage('Publish Gateway') {
             steps {
                 dir('future-traffic') {
-                    sh "docker rmi -f esp22-gateway"
-                    sh "docker rmi -f 192.168.160.99:5000/esp22-gateway"
+                    sh "docker rmi -f esp22-gateway || true"
+                    sh "docker rmi -f 192.168.160.99:5000/esp22-gateway || true"
                     sh "docker build -t esp22-gateway ."
                     sh "docker tag esp22-gateway 192.168.160.99:5000/esp22-gateway"
                     sh "docker push 192.168.160.99:5000/esp22-gateway"
