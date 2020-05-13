@@ -37,7 +37,7 @@ public class MainController {
     }
 
 
-    @Scheduled(fixedRate = 5000) // schedule task every 5 seconds
+   //@Scheduled(fixedRate = 5000) // schedule task every 5 seconds
     public void readDataset() throws IOException { // function that reads one line at a time from .csv file
 
         RandomAccessFile file = new RandomAccessFile("src/main/resources/dataset.csv", "rw");
