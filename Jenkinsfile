@@ -3,11 +3,12 @@ pipeline {
 
     stages {
        
-        /* stage('Build package') { 
+         stage('Build package') { 
             steps {
-                sh 'mvn -f future-traffic/pom.xml -DskipTests clean package' 
+                sh 'mvn -f future-traffic/pom.xml -DskipTests clean package assembly:single' 
             }
         } 
+        /*
         stage('Deploy to Artifactory') { 
             steps {
                 sh 'mvn deploy -f future-traffic/pom.xml -s settings.xml -DskipTests' 
@@ -25,8 +26,7 @@ pipeline {
         }
         */
     
-       
-
+    
         stage('Publish Gateway') {
             steps {
                 dir('future-traffic') {
@@ -49,13 +49,15 @@ pipeline {
         stage('Deploy db runtime') {
             steps {
                 sshagent(['future-traffic-runtime']) {
-                    sh "ssh -o 'StrictHostKeyChecking=no' -l esp22 192.168.160.103 docker run --name es22-database -p 6106:3306 -e MYSQL_ROOT_PASSWORD=password -d mysql:latest "         
+                    sh "ssh -o 'StrictHostKeyChecking=no' -l esp22 192.168.160.103 docker run --name es22-database -p 6106:3306 -e MYSQL_ROOT_PASSWORD=password -e MYSQL_DATABASE=buses -d mysql:latest "         
                 }
             }
         }
         stage('Deploy backend runtime') {
             steps {
                 sshagent(['future-traffic-runtime']) {
+                    sh "ssh -o 'StrictHostKeyChecking=no' -l esp22 192.168.160.103 docker stop esp22-gateway || true"
+                    sh "ssh -o 'StrictHostKeyChecking=no' -l esp22 192.168.160.103 docker rm esp22-gateway || true"
                     sh "ssh -o 'StrictHostKeyChecking=no' -l esp22 192.168.160.103 docker pull 192.168.160.99:5000/esp22-gateway "
                     sh "ssh -o 'StrictHostKeyChecking=no' -l esp22 192.168.160.103 docker run -d -p 6080:8080 --name esp22-gateway 192.168.160.99:5000/esp22-gateway"
                 }
@@ -64,6 +66,8 @@ pipeline {
         stage('Deploy front-end runtime') {
             steps {
                 sshagent(['future-traffic-runtime']) {
+                    sh "ssh -o 'StrictHostKeyChecking=no' -l esp22 192.168.160.103 docker stop esp22-webserver || true"
+                    sh "ssh -o 'StrictHostKeyChecking=no' -l esp22 192.168.160.103 docker rm esp22-webserver || true"
                     sh "ssh -o 'StrictHostKeyChecking=no' -l esp22 192.168.160.103 docker pull 192.168.160.99:5000/esp22-webserver"
                     sh "ssh -o 'StrictHostKeyChecking=no' -l esp22 192.168.160.103 docker run -d -p 6030:8080 --name esp22-webserver 192.168.160.99:5000/esp22-webserver"
                 }
