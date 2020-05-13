@@ -18,5 +18,5 @@
 FROM openjdk:8-jre-alpine 
 WORKDIR /usr/local/runme
 RUN apk --no-cache add curl
-RUN curl -X GET http://192.168.160.99:8082/artifactory/libs-release-local/pt/ua/deti/es/future-traffic/java-maven-app/2.2.6/future-traffic-2.2.6.RELEASE-jar-with-dependencies.jar -O
+RUN curl -X GET http://192.168.160.99:8082/artifactory/libs-release-local/project/future-traffic/2.2.6.RELEASE/future-traffic-2.2.6.RELEASE.jar -O
 ENTRYPOINT ["java","-jar", "future-traffic-2.2.6.RELEASE-jar-with-dependencies.jar"]
