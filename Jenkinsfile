@@ -60,6 +60,8 @@ pipeline {
                 sshagent(['future-traffic-runtime']) {
                     sh "ssh -o 'StrictHostKeyChecking=no' -l esp22 192.168.160.103 docker stop esp22-gateway || true"
                     sh "ssh -o 'StrictHostKeyChecking=no' -l esp22 192.168.160.103 docker rm esp22-gateway || true"
+                    sh "ssh -o 'StrictHostKeyChecking=no' -l esp22 192.168.160.103 docker rmi 192.168.160.99:5000/esp22-gateway || true"
+                   
                     sh "ssh -o 'StrictHostKeyChecking=no' -l esp22 192.168.160.103 docker pull 192.168.160.99:5000/esp22-gateway "
                     sh "ssh -o 'StrictHostKeyChecking=no' -l esp22 192.168.160.103 docker run -d -p 6080:8888 --name esp22-gateway 192.168.160.99:5000/esp22-gateway"
                 }
@@ -70,6 +72,7 @@ pipeline {
                 sshagent(['future-traffic-runtime']) {
                     sh "ssh -o 'StrictHostKeyChecking=no' -l esp22 192.168.160.103 docker stop esp22-webserver || true"
                     sh "ssh -o 'StrictHostKeyChecking=no' -l esp22 192.168.160.103 docker rm esp22-webserver || true"
+                    sh "ssh -o 'StrictHostKeyChecking=no' -l esp22 192.168.160.103 docker rmi 192.168.160.99:5000/esp22-webserver || true"
                     sh "ssh -o 'StrictHostKeyChecking=no' -l esp22 192.168.160.103 docker pull 192.168.160.99:5000/esp22-webserver"
                     sh "ssh -o 'StrictHostKeyChecking=no' -l esp22 192.168.160.103 docker run -d -p 6030:3000 --name esp22-webserver 192.168.160.99:5000/esp22-webserver"
                 }
