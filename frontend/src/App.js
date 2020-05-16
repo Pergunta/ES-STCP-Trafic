@@ -13,7 +13,7 @@ import {
 function App() {
     return ( <Router >
                 <Switch>
-                <Route path = "/" >
+                <Route exact path = "/" >
                     <Map />
                 </Route> 
                 </Switch> 
