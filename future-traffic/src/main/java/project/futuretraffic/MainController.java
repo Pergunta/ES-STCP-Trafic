@@ -56,6 +56,7 @@ public class MainController {
     // Get all buses
     @CrossOrigin(origins = "http://192.168.160.103:6030")
     @GetMapping("/all")
+    //@SendTo("topic/esp22")
     public Iterable<Bus> getAllBuses(){
         // This returns a JSON with all the buses        
         return busRepository.findAll();
