@@ -23,7 +23,7 @@ function baseClamp(number, lower, upper) {
 class Map extends Component {
 
   token = 'pk.eyJ1Ijoic2Fwb2tva2FzIiwiYSI6ImNrOTA2bXdhMTB1dGIzZnMycjBlc3JxeXcifQ.Sk-_m4_pM8lUX-wyMZh04g';
-
+  
   state = {
     viewport: {
       width: "100vw",
@@ -39,13 +39,17 @@ class Map extends Component {
   };
 
   componentDidMount() {
-
-    fetch('http://192.168.160.103:6080/api/all')
-      .then(response => response.json())
-      .then(data => this.setState({ data: data, loading: false }));
-
+    this.interval = setInterval( () =>  fetch("http://192.168.160.103:6080/api/all")
+       .then(response => response.json())
+       .then(data => this.setState({ data: data, loading: false }))
+      , 1000)
+ 
   }
 
+  componentDidUnmount() {
+    
+    clearInterval(this.interval)
+  }
   render() {
     return (
       /**<div>
@@ -106,6 +110,9 @@ class Map extends Component {
 
     )
   }
+
+
+
 }
 
 export default Map;
