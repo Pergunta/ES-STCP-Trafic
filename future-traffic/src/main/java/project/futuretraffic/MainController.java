@@ -37,7 +37,7 @@ import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
 
 
 @RestController // This means that this class is a Controller
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://192.168.160.103:6030")
 @RequestMapping(path="/api") // This means that the url for all API's in this controller start with /api
 public class MainController {
 
