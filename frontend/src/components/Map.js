@@ -42,7 +42,7 @@ class Map extends Component {
     this.interval = setInterval( () =>  fetch("http://192.168.160.103:6080/api/all")
        .then(response => response.json())
        .then(data => this.setState({ data: data, loading: false }))
-      , 1000)
+      , 100)
  
   }
 
