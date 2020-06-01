@@ -2,7 +2,7 @@ apply plugin: 'java'
 apply plugin: 'maven'
 
 group = 'project'
-version = '0.0.1-SNAPSHOT'
+version = '2.2.6.RELEASE'
 
 description = """demo"""
 
@@ -12,21 +12,32 @@ tasks.withType(JavaCompile) {
 	options.encoding = 'UTF-8'
 }
 
-buses
+
 
 repositories {
         
-     maven { url "https://repo.maven.apache.org/maven2" }
+     maven { url "http://192.168.160.99:8081/artifactory/libs-release" }
+     maven { url "http://192.168.160.99:8081/artifactory/libs-snapshot" }
+     maven { url "https://repo.maven.apache.org/maven2"}
 }
 dependencies {
+    testCompile group: 'io.cucumber', name: 'cucumber-java', version:'5.6.0'
+    testCompile group: 'io.cucumber', name: 'cucumber-junit', version:'5.6.0'
     testImplementation 'io.cucumber:cucumber-java:5.6.0'
-
+    testCompile group: 'junit', name: 'junit', version:'4.13'
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version:'2.2.6.RELEASE'
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version:'2.2.6.RELEASE'
-    runtime(group: 'mysql', name: 'mysql-connector-java', version:'8.0.19') {
+    compile group: 'org.apache.kafka', name: 'kafka_2.12', version:'2.3.1'
+    compile group: 'org.springframework.kafka', name: 'spring-kafka', version:'2.3.7.RELEASE'
+    runtime(group: 'mysql', name: 'mysql-connector-java', version:'8.0.19')
+     {
 exclude(module: 'protobuf-java')
     }
     runtime group: 'org.springframework.boot', name: 'spring-boot-devtools', version:'2.2.6.RELEASE'
+    testCompile group: 'io.cucumber', name: 'cucumber-spring', version:'5.6.0'
+    testCompile group: 'io.cucumber', name: 'cucumber-java', version:'5.6.0'
+    testCompile group: 'io.cucumber', name: 'cucumber-junit', version:'5.6.0'
+    testCompile group: 'junit', name: 'junit', version:'4.13'
     testCompile(group: 'org.springframework.boot', name: 'spring-boot-starter-test', version:'2.2.6.RELEASE') {
 exclude(module: 'junit-vintage-engine')
     }
@@ -36,14 +47,13 @@ configurations {
         extendsFrom testImplementation
     }
 }
-
 task cucumber() {
     dependsOn assemble, compileTestJava
     doLast {
         javaexec {
             main = "io.cucumber.core.cli.Main"
             classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
-            args = ['--plugin', 'pretty', '--glue', 'futuretraffic', 'src/main/resources']
+            args = ['--plugin', 'pretty', '--glue', 'project', 'src/test/resources']
         }
     }
 }
