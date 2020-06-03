@@ -15,7 +15,7 @@ pipeline {
             }
         }
         */
-        
+        /*
         stage('Deploy on runtime') {
             steps {
                 sshagent(credentials: ['deploy-key-rsa']) {
@@ -24,7 +24,7 @@ pipeline {
                 }
             }
         }
-        
+        */
     
     
         stage('Publish Gateway') {
