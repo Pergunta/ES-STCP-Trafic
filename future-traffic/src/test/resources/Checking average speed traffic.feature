@@ -9,5 +9,4 @@ Then he has the confirmation there are at least <Busnumbers> buses above speed <
 
 Examples:
     | speed limit            | Busnumbers   |
-    |  60                    |  1           |
     |  90                    |  0           |
