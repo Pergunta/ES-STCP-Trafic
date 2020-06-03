@@ -2,8 +2,16 @@ pipeline {
     agent any
 
     stages {
-       
-         stage('Build package') { 
+        stage('Deploy db runtime') {
+                steps {
+                    sshagent(['future-traffic-runtime']) {
+                        sh "ssh -o 'StrictHostKeyChecking=no' -l esp22 192.168.160.103 docker stop esp22-database || true "
+                        sh "ssh -o 'StrictHostKeyChecking=no' -l esp22 192.168.160.103 docker rm esp22-database || true "
+                        sh "ssh -o 'StrictHostKeyChecking=no' -l esp22 192.168.160.103 docker run --name esp22-database -p 6106:3306 -e MYSQL_ROOT_PASSWORD=password -e MYSQL_DATABASE=buses -d mysql:latest "         
+                    }
+                }
+        }
+        stage('Build package') { 
             steps {
                 sh 'mvn -f future-traffic/pom.xml -DskipTests clean package assembly:single' 
             }
@@ -46,22 +54,12 @@ pipeline {
             }
 
         }
-        stage('Deploy db runtime') {
-            steps {
-                sshagent(['future-traffic-runtime']) {
-                    sh "ssh -o 'StrictHostKeyChecking=no' -l esp22 192.168.160.103 docker stop esp22-database || true "
-                    sh "ssh -o 'StrictHostKeyChecking=no' -l esp22 192.168.160.103 docker rm esp22-database || true "
-                    sh "ssh -o 'StrictHostKeyChecking=no' -l esp22 192.168.160.103 docker run --name esp22-database -p 6106:3306 -e MYSQL_ROOT_PASSWORD=password -e MYSQL_DATABASE=buses -d mysql:latest "         
-                }
-            }
-        }
         stage('Deploy backend runtime') {
             steps {
                 sshagent(['future-traffic-runtime']) {
                     sh "ssh -o 'StrictHostKeyChecking=no' -l esp22 192.168.160.103 docker stop esp22-gateway || true"
                     sh "ssh -o 'StrictHostKeyChecking=no' -l esp22 192.168.160.103 docker rm esp22-gateway || true"
                     sh "ssh -o 'StrictHostKeyChecking=no' -l esp22 192.168.160.103 docker rmi 192.168.160.99:5000/esp22-gateway || true"
-                   
                     sh "ssh -o 'StrictHostKeyChecking=no' -l esp22 192.168.160.103 docker pull 192.168.160.99:5000/esp22-gateway "
                     sh "ssh -o 'StrictHostKeyChecking=no' -l esp22 192.168.160.103 docker run -d -p 6080:8888 --name esp22-gateway 192.168.160.99:5000/esp22-gateway"
                 }
