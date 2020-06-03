@@ -27,7 +27,7 @@ WORKDIR /usr/src/app
 ADD pom.xml /usr/src/app
 RUN ["/usr/local/bin/mvn-entrypoint.sh", "mvn", "verify", "clean", "--fail-never"]
 COPY . /usr/src/app
-RUN ["mvn", "package"]
+RUN ["mvn", "package ","-DskipTests"]
 
 EXPOSE 8081
 
