@@ -6,26 +6,30 @@ pipeline {
         stage('Build package') { 
             agent { docker 'maven:3.5-jdk-8-alpine' }
             stages {
-                dir('future-traffic'){
-                    stage('build') {
+                stage('build') {
                     steps {
-                        sh 'mvn clean compile'
+                        dir('future-traffic'){
+                            sh 'mvn clean compile'
+                        }
+                        
                     }
-                    }
-                    stage('test') {
-                        steps {
+                }
+                stage('test') {
+                    steps {
+                        dir('future-traffic'){
                             sh 'mvn test'
                         }
                     }
-                    stage ('report') {
-                        steps {
+                }
+                stage ('report') {
+                    steps {
+                        dir('future-traffic'){
                             cucumber buildStatus: 'SUCCESS',
                             fileIncludePattern: '**/*cucumber-report.json',
                             jsonReportDirectory: 'target'
                         }
                     }
                 }
-                
             }
             
         } 
