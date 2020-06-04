@@ -1,34 +1,33 @@
-#FROM maven:3.5-jdk-8-alpine
+# FROM maven:3.5-jdk-8-alpine
 
-#RUN mkdir -p /src/app
-#WORKDIR /src/app
-#ADD pom.xml /src/app
-#RUN ["/usr/local/bin/mvn-entrypoint.sh", "mvn", "verify", "clean", "--fail-never"]
-#COPY . /src/app
-#RUN ["mvn", "clean", "package"]
+# RUN mkdir -p /usr/src/app
+# WORKDIR /usr/src/app
+# ADD pom.xml /usr/src/app
+# RUN ["/usr/local/bin/mvn-entrypoint.sh", "mvn", "verify", "clean", "--fail-never"]
+# COPY . /usr/src/app
+# RUN ["mvn", "package","-Dmaven.test.skip=true"]
 
-#EXPOSE 8080
+# EXPOSE 8081
 
-#CMD ["mvn", "spring-boot:run"]
+# CMD ["mvn", "spring-boot:run"]
 
-#FROM openjdk:8-jre-alpine
-#COPY target/future-traffic-2.2.6.RELEASE.jar future-traffic.jar
-#ENTRYPOINT ["java", "-jar", "future-traffic.jar"]
-
-#FROM openjdk:8-jre-alpine 
-#WORKDIR /usr/local/runme
-#RUN apk --no-cache add curl
-#RUN curl -X GET http://192.168.160.99:8082/artifactory/libs-release-local/project/future-traffic/2.2.6.RELEASE/future-traffic-2.2.6.RELEASE.jar -O
-#ENTRYPOINT ["java","-jar", "future-traffic-2.2.6.RELEASE.jar"]
 FROM maven:3.5-jdk-8-alpine
 
-RUN mkdir -p /usr/src/app
-WORKDIR /usr/src/app
-ADD pom.xml /usr/src/app
-RUN ["/usr/local/bin/mvn-entrypoint.sh", "mvn", "verify", "clean", "--fail-never"]
-COPY . /usr/src/app
-RUN ["mvn", "package","-Dmaven.test.skip=true"]
+# Install git
+RUN apt-get update
+RUN apt-get install -y git 
+
+# Clone from code repository
+RUN mkdir /home/future-traffic
+RUN cd /home/future-traffic && git clone https://github.com/Pergunta/ES-STCP-Trafic.git
+
+# Set working directory
+WORKDIR /home/future-traffic/ES-STCP-Trafic
+
+# Install requirements and compile code
+RUN mvn clean package spring-boot:repackage -DskipTests
 
 EXPOSE 8081
 
-CMD ["mvn", "spring-boot:run"]
+# Run code
+ENTRYPOINT ["java","-jar","target/future-traffic-2.2.6.RELEASE.jar"]

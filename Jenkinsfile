@@ -2,19 +2,29 @@ pipeline {
     agent any
 
     stages {
-        stage('Deploy db runtime') {
-                steps {
-                    sshagent(['future-traffic-runtime']) {
-                        sh "ssh -o 'StrictHostKeyChecking=no' -l esp22 192.168.160.103 docker stop esp22-database || true "
-                        sh "ssh -o 'StrictHostKeyChecking=no' -l esp22 192.168.160.103 docker rm esp22-database || true "
-                        sh "ssh -o 'StrictHostKeyChecking=no' -l esp22 192.168.160.103 docker run --name esp22-database -p 6106:3306 -e MYSQL_ROOT_PASSWORD=password -e MYSQL_DATABASE=buses -d mysql:latest "         
+        
+        stage('Build package') { 
+            agent { docker 'maven:3.5-jdk-8-alpine' }
+            stages {
+                stage('build') {
+                    steps {
+                        sh 'mvn clean compile'
                     }
                 }
-        }
-        stage('Build package') { 
-            steps {
-                sh 'mvn -f future-traffic/pom.xml -DskipTests clean package assembly:single' 
+                stage('test') {
+                    steps {
+                        sh 'mvn test'
+                    }
+                }
+                stage ('report') {
+                    steps {
+                        cucumber buildStatus: 'SUCCESS',
+                        fileIncludePattern: '**/*cucumber-report.json',
+                        jsonReportDirectory: 'target'
+                    }
+                }
             }
+            
         } 
         /*
         stage('Deploy to Artifactory') { 
@@ -54,6 +64,17 @@ pipeline {
             }
 
         }
+
+        stage('Deploy db runtime') {
+                steps {
+                    sshagent(['future-traffic-runtime']) {
+                        sh "ssh -o 'StrictHostKeyChecking=no' -l esp22 192.168.160.103 docker stop esp22-database || true "
+                        sh "ssh -o 'StrictHostKeyChecking=no' -l esp22 192.168.160.103 docker rm esp22-database || true "
+                        sh "ssh -o 'StrictHostKeyChecking=no' -l esp22 192.168.160.103 docker run --name esp22-database -p 6106:3306 -e MYSQL_ROOT_PASSWORD=password -e MYSQL_DATABASE=buses -d mysql:latest "         
+                    }
+                }
+        }
+
         stage('Deploy backend runtime') {
             steps {
                 sshagent(['future-traffic-runtime']) {
