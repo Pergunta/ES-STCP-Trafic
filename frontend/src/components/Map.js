@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import maxBounds from './MyOverlay';
 import ReactMapGL, { Marker, Popup } from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
-
+import Navbar from './Navbar'
 var bounds = [
-  [41.159925, -8.686844], // Southwest coordinates
-  [41.162768, -8.560501] // Northeast coordinates
+  [40.939344, -8.133253], // Southwest coordinates
+  [41.441592, -8.786630] // Northeast coordinates
 ];
 
 function baseClamp(number, lower, upper) {
@@ -56,6 +56,7 @@ class Map extends Component {
          {this.state.data.length}
       </div>*/
       <div >
+        <Navbar/>
         <ReactMapGL  {...this.state.viewport}
           maxBounds={bounds}
           mapboxApiAccessToken={this.token}
