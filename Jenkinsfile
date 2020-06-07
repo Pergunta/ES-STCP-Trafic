@@ -13,7 +13,7 @@ pipeline {
 
         stage('Deploy to Artifactory'){
             steps{
-                sh 'cd future-traffic/ && mvn deploy -s settings.xml -DskipTests'
+                sh 'cd future-traffic/ && mvn deploy -s ../settings.xml -DskipTests'
             }
         }
 
