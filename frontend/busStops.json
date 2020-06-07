@@ -1,0 +1,219 @@
+[
+    {
+        "id":0,
+        "origem":"CASTELO DO QUEIJO",
+        "linha":200,
+        "destino":"BOLHAO",
+        "paragens":29,
+        "zona": "PRT2"
+    },
+    {
+        "id":1,
+        "origem":"VISO",
+        "linha":201,
+        "destino":"AV.ALIADOS",
+        "paragens":25,
+        "zona": "PRT2"
+    },
+    {
+        "id":2,
+        "origem":"PASSEIO ALEGRE",
+        "linha":202,
+        "destino":"AV.ALIADOS",
+        "paragens":31,
+        "zona": "PRT2"
+    },
+    {
+        "id":3,
+        "origem":"CASTELO DO QUEIJO",
+        "linha":203,
+        "destino":"MARQUES",
+        "paragens":30,
+        "zona": "PRT2"
+    },
+    {
+        "id":4,
+        "origem":"FOZ",
+        "linha":204,
+        "destino":"HOSP. S. JOÃO (URGENCIA)",
+        "paragens":38,
+        "zona": "PRT3"
+    },
+    {
+        "id":5,
+        "origem":"CASTELO DO QUEIJO",
+        "linha":205,
+        "destino":"CAMPANHA",
+        "paragens":50,
+        "zona": "PRT3"
+    },
+    {
+        "id":6,
+        "origem":"BR. STO.EUGENIO (ESCOLA)",
+        "linha":206,
+        "destino":"CAMPANHA",
+        "paragens":36,
+        "zona": "PRT3"
+    },
+
+    {
+        "id":7,
+        "origem":"MERCADO DA FOZ",
+        "linha":207,
+        "destino":"CAMPANHA",
+        "paragens":36,
+        "zona": "PRT2"
+    },
+    {
+        "id":8,
+        "origem":"ALDOAR JUNTA FREG.",
+        "linha":208,
+        "destino":"AV. ALIADOS",
+        "paragens":30,
+        "zona": "PRT2"
+    },
+    {
+        "id":9,
+        "origem":"PRELADA",
+        "linha":209,
+        "destino":"PASTELEIRA",
+        "paragens":30,
+        "zona": "PRT3"
+    },
+    {
+        "id":10,
+        "origem":"HOSP. S. JOÃO (URGÊNCIA)",
+        "linha":300,
+        "destino":"HOSP. S. JOÃO (URGÊNCIA)",
+        "paragens":46,
+        "zona": "PRT3"
+    },
+    {
+        "id":11,
+        "origem":"BR. STA.LUZIA",
+        "linha":304,
+        "destino":"TRINDADE",
+        "paragens":20,
+        "zona": "PRT1"
+    },
+    {
+        "id":12,
+        "origem":"HOSP. S. JOÃO (CIRCUNVALAÇÃO)",
+        "linha":305,
+        "destino":"TRINDADE",
+        "paragens":21,
+        "zona": "PRT3"
+    },
+    {
+        "id":13,
+        "origem":"PARQUE NASCENTE",
+        "linha":400,
+        "destino":"AV.ALIADOS",
+        "paragens":28,
+        "zona": "PRT1"
+    },
+    {
+        "id":14,
+        "origem":"S. ROQUE",
+        "linha":401,
+        "destino":"BOLHÃO",
+        "paragens":20,
+        "zona": "PRT3"
+    },
+    {
+        "id":15,
+        "origem":"S. ROQUE G. BARROS",
+        "linha":402,
+        "destino":"BOAVISTA - B. SUCESSO",
+        "paragens":23,
+        "zona": "PRT3"
+    },
+    {
+        "id":16,
+        "origem":"MATOSINHOS MERCADO",
+        "linha":500,
+        "destino":"PR.LIBERDADE",
+        "paragens":35,
+        "zona": "MTS1"
+    },
+    {
+        "id":17,
+        "origem":"MATOSINHOS PRAIA",
+        "linha":501,
+        "destino":"AV. ALIADOS",
+        "paragens":34,
+        "zona": "MTS1"
+    },
+    {
+        "id":18,
+        "origem":"MATOSINHOS PRAIA",
+        "linha":502,
+        "destino":"BOLHÃO",
+        "paragens":30,
+        "zona": "MTS1"
+    },
+    {
+        "id":19,
+        "origem":"AEROPORTO",
+        "linha":601,
+        "destino":"CORDOARIA",
+        "paragens":32,
+        "zona": "VDC8"
+    },
+    {
+        "id":20,
+        "origem":"MAIA(ZOO)",
+        "linha":603,
+        "destino":"MARQUÊS",
+        "paragens":32,
+        "zona": "VDC8"
+    },
+    {
+        "id":21,
+        "origem":"CAMPO",
+        "linha":700,
+        "destino":"BOLHÃO",
+        "paragens":53,
+        "zona": "VLG3"
+    },
+    {
+        "id":22,
+        "origem":"CODICEIRA",
+        "linha":701,
+        "destino":"BOLHÃO",
+        "paragens":52,
+        "zona": "VLG2"
+    },
+    {
+        "id":23,
+        "origem":"ERMESINDE(ESTAÇÃO)",
+        "linha":707,
+        "destino":"BOLHÃO",
+        "paragens":41,
+        "zona": "MAI4"
+    },
+    {
+        "id":24,
+        "origem":"GONDOMAR (SOUTO)",
+        "linha":800,
+        "destino":"BOLHÃO",
+        "paragens":38,
+        "zona": "MAI4"
+    },
+    {
+        "id":25,
+        "origem":"ERMESINDE(ESTAÇÃO)",
+        "linha":707,
+        "destino":"BOLHÃO",
+        "paragens":41,
+        "zona": "GDM2"
+    },
+    {
+        "id":26,
+        "origem":"S.PEDRO C. /PASSAL",
+        "linha":801,
+        "destino":"CORDOARIA",
+        "paragens":34,
+        "zona": "GDM2"
+    }
+]
