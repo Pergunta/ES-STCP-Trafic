@@ -39,7 +39,7 @@ pipeline {
 
         stage('Cucumber Tests'){
             steps{
-                sh 'mvn test'
+                sh 'cd future-traffic/ && mvn test'
             }
         }
 
