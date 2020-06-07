@@ -8,17 +8,18 @@
 		<version>2.2.6.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>project</groupId>
-	<artifactId>future-traffic</artifactId>
-	<name>demo</name>
-	<description>Demo project for Spring Boot</description>
+	<groupId>com.esp22</groupId>
+	<artifactId>futureTraffic</artifactId>
+	<version>0.0.1.1</version>
+	<packaging>jar</packaging>
+	<name>futureTraffic</name>
+	<description>Future Traffic - Software Engineering </description>
 
 	<properties>
 		<java.version>1.8</java.version>
         <cucumber.version>5.6.0</cucumber.version>
         <junit.version>4.13</junit.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-
 	</properties>
 
 	<distributionManagement>
@@ -30,14 +31,6 @@
 	</distributionManagement>
 	
 	<dependencies>
-		
-		<dependency>
-			<groupId>io.cucumber</groupId>
-			<artifactId>cucumber-spring</artifactId>
-			<version>${cucumber.version}</version>
-			<scope>test</scope>
-		</dependency>
-		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -46,26 +39,6 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-		   <dependency>
-            <groupId>io.cucumber</groupId>
-            <artifactId>cucumber-java</artifactId>
-            <version>${cucumber.version}</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>io.cucumber</groupId>
-            <artifactId>cucumber-junit</artifactId>
-            <version>${cucumber.version}</version>
-            <scope>test</scope>
-        </dependency>
-        
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>${junit.version}</version>
-            <scope>test</scope>
-        </dependency>
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
@@ -88,17 +61,39 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-
 		<dependency>
 			<groupId>org.apache.kafka</groupId>
 			<artifactId>kafka_2.12</artifactId>
-		</dependency>
-		
+		</dependency>	
 		<dependency>
 			<groupId>org.springframework.kafka</groupId>
 			<artifactId>spring-kafka</artifactId>
 			<version>2.3.7.RELEASE</version>
 		</dependency>
+		<dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-java</artifactId>
+            <version>${cucumber.version}</version>
+            <scope>test</scope>
+        </dependency>
+		<dependency>
+			<groupId>io.cucumber</groupId>
+			<artifactId>cucumber-spring</artifactId>
+			<version>${cucumber.version}</version>
+			<scope>test</scope>
+		</dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-junit</artifactId>
+            <version>${cucumber.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
 	</dependencies>
 
 	<build>
@@ -106,40 +101,6 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-			<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-surefire-plugin</artifactId>
-					<version>2.20</version>
-					<configuration>
-					<testSourceDirectory>src/test</testSourceDirectory> 
-						<includes>
-							<include>**/*RunCucumberTest.java</include>
-						</includes>
-					</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-            	<artifactId>maven-assembly-plugin</artifactId>
-            	<version>2.2.1</version>
-            	<configuration>
-                <descriptorRefs>
-                    <descriptorRef>jar-with-dependencies</descriptorRef>
-                </descriptorRefs>
-                <archive>
-                    <manifest>
-                        <mainClass>project.futuretraffic.FutureTraffic</mainClass>
-                    </manifest>
-                </archive>
-            </configuration>
-			<executions>
-                <execution>
-                    <phase>package</phase>
-                    <goals>
-                        <goal>single</goal>
-                    </goals>
-                </execution>
-            </executions>
 			</plugin>
 		</plugins>
 	</build>
