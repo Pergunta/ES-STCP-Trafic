@@ -17,16 +17,13 @@
 
 	<properties>
 		<java.version>1.8</java.version>
-        <cucumber.version>5.6.0</cucumber.version>
-        <junit.version>4.13</junit.version>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
 	<distributionManagement>
 		<repository>
 			<id>central</id>
 			<name>c04a282c7a6d-releases</name>
-			<url>http://192.168.160.99:8081/artifactory/libs-release</url>
+			<url>http://192.168.160.99:8081/artifactory/libs-release-local</url>
 		</repository>
 	</distributionManagement>
 	
@@ -54,12 +51,6 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
-			<exclusions>
-				<exclusion>
-					<groupId>org.junit.vintage</groupId>
-					<artifactId>junit-vintage-engine</artifactId>
-				</exclusion>
-			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.kafka</groupId>
@@ -72,20 +63,20 @@
 		</dependency>
 		<dependency>
             <groupId>io.cucumber</groupId>
-            <artifactId>cucumber-java</artifactId>
-            <version>${cucumber.version}</version>
+            <artifactId>cucumber-java8</artifactId>
+            <version>4.2.0</version>
             <scope>test</scope>
         </dependency>
 		<dependency>
 			<groupId>io.cucumber</groupId>
 			<artifactId>cucumber-spring</artifactId>
-			<version>${cucumber.version}</version>
+			<version>4.2.0</version>
 			<scope>test</scope>
 		</dependency>
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-junit</artifactId>
-            <version>${cucumber.version}</version>
+        	<version>4.2.0</version>
             <scope>test</scope>
         </dependency>
         <dependency>
