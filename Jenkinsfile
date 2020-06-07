@@ -46,6 +46,7 @@ pipeline {
         stage('Deploy runtime'){
             steps{
                 sshagent(credentials: ['future-traffic-runtime']){
+                    sh "mkdir target"
                     sh "ssh -o 'StrictHostKeyChecking=no' -l esp22 192.168.160.103 curl -X GET http://192.168.160.99:8082/artifactory/libs-release-local/com/esp22/futureTraffic/0.0.1.1/futureTraffic-0.0.1.1.jar --output target/futureTraffic-0.0.1.1.jar"
                     sh "ssh -o 'StrictHostKeyChecking=no' -l esp22 192.168.160.103 docker pull 192.168.160.99:5000/esp22-backend:latest"
                     sh "ssh -o 'StrictHostKeyChecking=no' -l esp22 192.168.160.103 docker pull 192.168.160.99:5000/esp22-frontend:latest"
