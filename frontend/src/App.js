@@ -3,6 +3,8 @@ import logo from './logo.svg';
 import './App.css';
 import Map from './components/Map'
 import Navbar from './components/Navbar'
+import Statistics from './components/Statistics'
+import BusStops from './components/BusStops'
 
 import {
     BrowserRouter as Router,
@@ -17,9 +19,12 @@ function App() {
                 <Route exact path = "/" >
                     <Map />
                 </Route>
-                <Route exact path = "/navbar">
-                    <Navbar />    
-                </Route> 
+                <Route exact path = "/busStops">
+                    <Statistics/>
+                </Route>
+                <Route exact path = "/statistics">
+                    <BusStops/>
+                </Route>
                 </Switch> 
          </Router>
     );

@@ -1,4 +1,3 @@
-
 export default class MyOverlay{
     maxBounds={
         maxLongitude :-8.482128,

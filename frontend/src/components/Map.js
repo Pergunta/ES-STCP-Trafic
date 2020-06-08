@@ -39,7 +39,7 @@ class Map extends Component {
   };
 
   componentDidMount() {
-    this.interval = setInterval( () =>  fetch("http://192.168.160.103:6080/api/all")
+    this.interval = setInterval( () =>  fetch("http://localhost:8888/api/all")
        .then(response => response.json())
        .then(data => this.setState({ data: data, loading: false }))
       , 100)
@@ -101,8 +101,8 @@ class Map extends Component {
               }}
             >
               <div>
-                <p>{this.state.selectedBus.nodeId}</p>
-                <p>{this.state.selectedBus.speed}</p>
+                <p>Bus ID: {this.state.selectedBus.nodeId}</p>
+                <p>{this.state.selectedBus.speed} km/h</p>
               </div>
             </Popup>
           ) : null}

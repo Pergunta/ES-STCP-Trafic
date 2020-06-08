@@ -17,8 +17,9 @@ class Navbar extends Component{
   <ReactBootStrap.Navbar.Collapse id="responsive-navbar-nav">
     <ReactBootStrap.Nav className="mr-auto">
         <img class="image_img" src={logo}/>
-      <ReactBootStrap.Nav.Link href="#Map">Map</ReactBootStrap.Nav.Link>
-      <ReactBootStrap.Nav.Link href="#statistics">Statistics</ReactBootStrap.Nav.Link>
+      <ReactBootStrap.Nav.Link href="/">Map</ReactBootStrap.Nav.Link>
+      <ReactBootStrap.Nav.Link href="/busStops">Buses Stops</ReactBootStrap.Nav.Link>
+      <ReactBootStrap.Nav.Link href="/statistics">Statistics</ReactBootStrap.Nav.Link>
       {/* <ReactBootStrap.NavDropdown title="Dropdown" id="collasible-nav-dropdown">
         <ReactBootStrap.NavDropdown.Item href="#action/3.1">Action</ReactBootStrap.NavDropdown.Item>
         <ReactBootStrap.NavDropdown.Item href="#action/3.2">Another action</ReactBootStrap.NavDropdown.Item>
