@@ -1,10 +1,10 @@
 # ES-STCP-Trafic
 
-sudo npm install --save react-map-gl
-sudo audit fix
-sudo npm fund
 
 
+
+
+https://sapokokas.github.io/es_p2g22/index
 
 YouTube video :
 
